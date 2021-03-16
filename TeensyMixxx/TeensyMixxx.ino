@@ -7,44 +7,27 @@
 //Time to debounce the buttons in ms
 #define pbBounce 150
 
-// The status of the two shift buttons (left and right deck)
-bool shiftKey[2] = {false, false};
+// MUX STUFF 
+#define SIG_pin 43 //read pin
+#define analogThreshold 5 //threshold
 
-//PUSHBUTTON
-// '1' == Button verbunden
-// '0' == Button verbunden
-// '9' == Encoder verbunden
-int toReadPushButton[38] =
-{ //Pin number are written below
-  9, 9, 9, 9, 1, //0-4
-  1, 9, 1, 1, 1, //5-9
-  1, 1, 1, 1, 0, //10-14
-  0, 0, 0, 9, 9, //15-19
-  1, 1, 1, 1, 1, //20-24
-  0, 0, 0, 0, 0, //25-29
-  0, 0, 0, 0, 0, //30-34
-  0, 9, 9     //35-37
-};
+
+
+// The status of the three shift buttons (left/right deck & track select)
+bool shiftKey[3] = {false, false, false};
+char shiftPins[3][2] = {{1,2},{0,10},{0,4}};
+char shiftOld[3] = {0,0,0};
 
 int MUXupdateCounter = 15;
 
-
-
-// VARIABLES AND FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-
 //ENCODERS
-Encoder enc1(0, 1);
+Encoder enc1(18, 19);
 Encoder enc2(2, 3);
-Encoder enc3(18, 19);
+Encoder enc3(0, 1);
 
-// MUX STUFF ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-int SIG_pin = 43; //read pin
-int tempAnalogIn = 0; //array to hold previously read analog values
-int tempAnalogInMap = 0;
-int analogThreshold = 20; //threshold
 int controlPin[] = {14, 15, 16, 17}; //set contol pins in array
 
-//control array for the mux pins
+//control array for the mux pins, TODO remove this
 int muxChannel[16][4] = {
   {0, 0, 0, 0}, //channel 0
   {1, 0, 0, 0}, //channel 1
@@ -64,7 +47,7 @@ int muxChannel[16][4] = {
   {1, 1, 1, 1} //channel 15
 };
 
-//LED-Status blink ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+//LED-Status blink
 bool ledStatus[2];
 bool syncStatus[2];
 bool blinkMode[2];
@@ -83,7 +66,11 @@ int readPoti(int num) {
     out += analogRead(num);
     delayMicroseconds(30);
   }
-  return (out/3);
+  return out/3;
+}
+
+bool readBtn(int num) {
+  return digitalRead(num);
 }
 
 
@@ -91,19 +78,17 @@ int readPoti(int num) {
 int readMux(int channel, int no, bool analog) {
 
   // Set the four MUX control pins
-  for (int i = 0; i < 4; i ++) {
-    digitalWrite(controlPin[i], muxChannel[channel][i]);
-  }
+  for (int i = 0; i < 4; i ++) digitalWrite(controlPin[i], muxChannel[no][i]);
 
   if (analog) { // Read a analog value from a MUX
-    delay(1);
-    return readPoti(SIG_pin + no);
-  } else { // Read a digital button value from a MUX
-    pinMode(SIG_pin + no, INPUT_PULLUP);
+    pinMode(SIG_pin + channel, INPUT);
     delayMicroseconds(50);
-    bool val = digitalRead(SIG_pin + no);
-    pinMode(SIG_pin + no, INPUT);
-    return val;
+    return readPoti(SIG_pin + channel);
+  } else { // Read a digital button value from a MUX
+    pinMode(SIG_pin + channel, INPUT_PULLUP);
+    delayMicroseconds(50);
+    bool btnVal = readBtn(SIG_pin + channel);
+    return btnVal;
   }
 }
 
@@ -111,20 +96,19 @@ int readMux(int channel, int no, bool analog) {
 // Reads a value from a MUX or directly from the Teensy
 int readValue(int channel, int no, bool analog) {
   if (channel == 0) {
-    return readPoti(no);
+    if (analog) return readPoti(no);
+    else return readBtn(no);
   } else {
     return readMux(channel - 1, no, analog);
   }
 }
 
 
-int analogThresholdTeensy = 4; //threshold to avoid jitter
-
 
 // All the pins, their function and their MIDI no [MIDIno, MUXno, PINno] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // Analog values
-char anaConf[31][3] =
+char anaConf[32][3] =
 {
   // THE LOW MID HIGH MIXER VALUES
   {0x01, 2, 12},
@@ -144,10 +128,10 @@ char anaConf[31][3] =
   {0x0C, 2,  6},
   
   // THE VOLUME VALUES
-  //{0x0D, 3,  8},
-  //{0x0E, 3, 11},
-  //{0x0F, 3,  9},
-  //{0x10, 3, 10},
+  {0x0D, 1,  8},
+  {0x0E, 1, 11},
+  {0x0F, 1,  9},
+  {0x10, 1, 10},
   
   // HIGH PASS FILTERS
   {0x11, 2, 15},
@@ -156,57 +140,77 @@ char anaConf[31][3] =
   {0x14, 2,  7},
   
   // FX 1
-  {0x15, 1,  7},
-  {0x16, 1,  5},
-  {0x17, 1,  6},
-  {0x18, 1,  4},
+  {0x15, 3,  7},
+  {0x16, 3,  5},
+  {0x17, 3,  6},
+  {0x18, 3,  4},
+  
   // FX 2
-  {0x19, 1, 12},
-  {0x1A, 1, 13},
-  {0x1B, 1, 14},
-  {0x1C, 1, 15},
+  {0x19, 3, 12},
+  {0x1A, 3, 13},
+  {0x1B, 3, 14},
+  {0x1C, 3, 15},
+
+  // ~~~~~~~ THE FOLLOWING PART DEPENDS ON SHIFT KEYS ~~~~~~~~
+
+  // DECKS speed, loop size
+  {0x20, 0, 42},
+  {0x22, 0, 41},
+
+  {0x26, 0, 40},
+  {0x28, 0, 39},
 };
 
 // Digital values (buttons)
-char btnConf[31][4] =
+char btnConf[31][3] =
 {
+  // Headphone on
+  {0x08, 1,12},
+  {0x09, 1,13},
+  {0x0A, 1,14},
+  {0x0B, 1,15},
+  
   // FX SELECT
-  // TODO
+  {0x10, 0,24},
+  {0x11, 0,23},
+  {0x12, 0,22},
+  {0x13, 0,21},
+  {0x14, 0,21},
 
   // FX1
-  {0x15, 1, 3,  1},
-  {0x16, 1, 2,  1},
-  {0x17, 1, 1,  1},
-  {0x18, 1, 0,  1},
+  {0x15, 3, 3},
+  {0x16, 3, 2},
+  {0x17, 3, 1},
+  {0x18, 3, 0},
 
   // FX2
-  {0x19, 1, 8,  1},
-  {0x20, 1, 9,  1},
-  {0x21, 1, 10, 1},
-  {0x22, 1, 11, 1},
+  {0x19, 3, 8},
+  {0x1A, 3, 9},
+  {0x1B, 3, 10},
+  {0x1C, 3, 11},
 
 
   // DECK CONTROL LEFT
-  {0x20, 3, 0,  1}, //PLAY
-  {0x21, 3, 1,  1}, //CUE
-  {0x22, 3, 3,  1}, //SYNC
-  {0x23, 3, 4,  1}, //LOOP1
-  {0x24, 3, 5,  1}, //LOOP2
-  {0x25, 3, 6,  1}, //MOVE1
-  {0x26, 3, 7,  1}, //MOVE2
+  {0x20, 1, 0}, //PLAY
+  {0x21, 1, 1}, //CUE
+  {0x22, 1, 3}, //SYNC
+  {0x23, 1, 4}, //LOOP1
+  {0x24, 1, 5}, //LOOP2
+  {0x25, 1, 6}, //MOVE1
+  {0x26, 1, 7}, //MOVE2
 
    // DECK CONTROL RIGHT
-  {0x40, 0, 12, 1}, //PLAY
-  {0x41, 0, 12, 1}, //CUE
-  {0x42, 0, 12, 1}, //SYNC
-  {0x43, 0, 12, 1}, //LOOP1
-  {0x44, 0, 12, 1}, //LOOP2
-  {0x45, 0, 12, 1}, //MOVE1
-  {0x46, 0, 12, 1}, //MOVE2
+  {0x30, 0, 12}, //PLAY
+  {0x31, 0, 11}, //CUE
+  {0x32, 0, 9}, //SYNC
+  {0x33, 0, 8}, //LOOP1
+  {0x34, 0, 7}, //LOOP2
+  {0x35, 0, 6}, //MOVE1 // TODO ?
+  {0x36, 0, 5}, //MOVE2
 };
 
 // previous values
-int anaOld[31] = {};
+int anaOld[32] = {};
 int digOld[31] = {};
 
 
@@ -215,10 +219,9 @@ void setup() {
 
   Serial.begin(31250);
 
-  //PUSHBUTTON pin config
-  for (int i = 0; i < 38; i++) {
-    if (toReadPushButton[i] == 1) {
-      pinMode(i, INPUT_PULLUP); //pushbutton pullup
+  for (int i=0; i < 31; i++) {
+    if (btnConf[i][1] == 0) { // Only set Pins for Teensy Analog Inputs
+      pinMode(btnConf[i][2], INPUT_PULLUP);
     }
   }
 
@@ -253,38 +256,65 @@ void loop() {
   for (int i = 0; i < 3; i++) {
     // Act on the encoder value
     if (encVal[i] != 64) {
-      usbMIDI.sendControlChange(240+i, encVal[i], channelNumber);
+      int ccNo = 0x21+4*i;
+      // Apply shift for scratching
+      if ( (ccNo == 0x21 && shiftKey[0]) ||  (ccNo == 0x29 && shiftKey[1]) ) ccNo += 0x10; //+16 
+      
+      usbMIDI.sendControlChange(ccNo, encVal[i], channelNumber);
     }
   }
   // Reset controllers to normal position
   enc1.write(64); enc2.write(64); enc3.write(64);
 
-
-
   // Loop through analog values
-  for (char i = 0; i < 31; i++) {
-    int readVal = readMux(anaConf[i][2], anaConf[i][1], true);
+  for (char i = 0; i < 32; i++) {
+    int readVal = readValue(anaConf[i][1], anaConf[i][2], true);
     if (abs(anaOld[i]-readVal) > analogThreshold) {
-      usbMIDI.sendControlChange(anaConf[i][0], map(readVal, 0, 1023, 0, 127), channelNumber);
+      char ccNo = anaConf[i][0];
+
+      // Apply the shift key for the Speed and Loopsize
+      if (ccNo > 0x1F) {
+         if (ccNo < 0x25 && shiftKey[0]) ccNo += 8;
+         else if (ccNo > 0x25 && shiftKey[1]) ccNo += 8;
+      }
+      
+      usbMIDI.sendControlChange(ccNo, map(readVal, 0, 1023, 0, 127), channelNumber);
       anaOld[i] = readVal;
     }
   }
-
-
-  char nullChar[4] = {0,0,0,0};
   
   // Loop through digital values
   for (char i = 0; i < 31; i++) {
-    if (btnConf[i] != nullChar) { // TODO
-    bool readVal = readMux(btnConf[i][2], btnConf[i][1], false);
+    bool readVal = readValue(btnConf[i][1], btnConf[i][2], false);
     if (readVal != digOld[i]) {
-      midiNoteOnOff(readVal, anaConf[i][0]);
+      int ccNo = btnConf[i][0];
+
+      // Shift for Headphone Btns
+      if (ccNo < 0x10) {
+        if (shiftKey[2]) ccNo += 0x04;
+      }
+      //Shift for Decks
+      else if (ccNo > 0x1F) {
+         if (ccNo < 0x30 && shiftKey[0]) ccNo += 32;
+         else if (ccNo > 0x2F && shiftKey[1]) ccNo += 32;
+      }
+      
+      midiNoteOnOff(!readVal, ccNo);
       digOld[i] = readVal;
-    }
     }
   }
 
-  delay(10);
+
+  // Implement the shift keys
+  for (char i = 0; i < 3; i++) {
+    bool val = !readValue(shiftPins[i][0], shiftPins[i][1], false);
+    if (val && !shiftOld[i]) {
+      shiftKey[i] = !shiftKey[i];
+    }
+    shiftOld[i] = val;
+  }
+
+  delay(30);
 
 }
 
@@ -304,6 +334,8 @@ void initMUXvalues() {
 
   int tempAnalogInTeensy = 0;
   int tempAnalogInMapTeensy = 0;
+  int tempAnalogIn = 0;
+  int tempAnalogInMap = 0;
 
   //ANALOG IN MUX loops
   for (int i = 0; i < 16; i++) {
