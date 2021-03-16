@@ -8,6 +8,50 @@
         <controls>
 			<!-- General buttons -->
 
+			<!-- Headphone Toggle Buttons -->
+            <control>
+                <group>[Channel1]</group>
+                <key>pfl</key>
+                <description>Headphone On/Off Ch1</description>
+                <status>0x90</status>
+                <midino>0x08</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>pfl</key>
+                <description>Headphone On/Off Ch2</description>
+                <status>0x90</status>
+                <midino>0x09</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel3]</group>
+                <key>pfl</key>
+                <description>Headphone On/Off Ch3</description>
+                <status>0x90</status>
+                <midino>0x0A</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel4]</group>
+                <key>pfl</key>
+                <description>Headphone On/Off Ch4</description>
+                <status>0x90</status>
+                <midino>0x0B</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            
+            <!-- Load tracks to decks -->
+			
 			
 			<!-- Each Channel Buttons -->
 			
@@ -119,6 +163,115 @@
                 </options>
             </control>
 			
+			<!-- Channel 3 -->
+            <control>
+                <group>[Channel3]</group>
+                <key>play</key>
+                <description>Play/Pause Channel 3</description>
+                <status>0x80</status>
+                <midino>0x30</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel3]</group>
+                <key>beatloop_activate</key>
+                <description>Start Loop Ch3</description>
+                <status>0x90</status>
+                <midino>0x33</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel3]</group>
+                <key>reloop_toggle</key>
+                <description>Stop Loop Ch3</description>
+                <status>0x90</status>
+                <midino>0x34</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel3]</group>
+                <key>beatjump_backward</key>
+                <description>Jump Backwards Ch3</description>
+                <status>0x90</status>
+                <midino>0x35</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel3]</group>
+                <key>beatjump_forward</key>
+                <description>Jump Forward Ch3</description>
+                <status>0x90</status>
+                <midino>0x36</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<!-- Channel 4 -->
+			<control>
+                <group>[Channel4]</group>
+                <key>play</key>
+                <description>Play/Pause Channel 4</description>
+                <status>0x80</status>
+                <midino>0x50</midino>
+                <options>
+                    <switch/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel4]</group>
+                <key>beatloop_activate</key>
+                <description>Start Loop Ch4</description>
+                <status>0x90</status>
+                <midino>0x53</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel4]</group>
+                <key>reloop_toggle</key>
+                <description>Stop Loop Ch4</description>
+                <status>0x90</status>
+                <midino>0x54</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel4]</group>
+                <key>beatjump_backward</key>
+                <description>Jump Backwards Ch4</description>
+                <status>0x90</status>
+                <midino>0x55</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel4]</group>
+                <key>beatjump_forward</key>
+                <description>Jump Forward Ch4</description>
+                <status>0x90</status>
+                <midino>0x56</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            
+            
 			
 			<!-- EQ knobs -->
             <control>
@@ -289,7 +442,48 @@
 			
 			<!-- High-/Low-pass-filters -->
 			
-			
+			<control>
+                <group>[QuickEffectRack1_[Channel1]]</group>
+                <key>super1</key>
+                <description>Quick Filter Ch1</description>
+                <status>0xB0</status>
+                <midino>0x11</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[QuickEffectRack1_[Channel2]]</group>
+                <key>super1</key>
+                <description>Quick Filter Ch2</description>
+                <status>0xB0</status>
+                <midino>0x12</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[QuickEffectRack1_[Channel3]]</group>
+                <key>super1</key>
+                <description>Quick Filter Ch3</description>
+                <status>0xB0</status>
+                <midino>0x13</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[QuickEffectRack1_[Channel4]]</group>
+                <key>super1</key>
+                <description>Quick Filter Ch4</description>
+                <status>0xB0</status>
+                <midino>0x14</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            
+            
 			<!-- CC for each channel -->
 			
 			<!-- Channel 1 -->
@@ -375,37 +569,7 @@
                     <script-binding/>
                 </options>
             </control>
-			
-            <control>
-                <group>[Channel1]</group>
-                <key>pfl</key>
-                <description>MIDI Learned from 2 messages.</description>
-                <status>0x90</status>
-                <midino>0x08</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[QuickEffectRack1_[Channel1]]</group>
-                <key>super1</key>
-                <description>MIDI Learned from 588 messages.</description>
-                <status>0xB0</status>
-                <midino>0x11</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[QuickEffectRack1_[Channel2]]</group>
-                <key>super1</key>
-                <description>MIDI Learned from 600 messages.</description>
-                <status>0xB0</status>
-                <midino>0x12</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
+            
         </controls>
         <outputs/>
     </controller>
