@@ -1,209 +1,55 @@
 <?xml version='1.0' encoding='utf-8'?>
-<MixxxControllerPreset mixxxVersion="" schemaVersion="1">
+<MixxxControllerPreset schemaVersion="1" mixxxVersion="">
     <info/>
     <controller id="Teensy">
         <scriptfiles>
             <file filename="TeensyMIDI.js" functionprefix="Teensy"/>
         </scriptfiles>
         <controls>
-			<control>
-                <group>[Channel1]</group>
-                <key>Teensy.wheelTurn</key>
-                <description></description>
-                <status>0xB0</status>
-                <midino>0x72</midino>
-                <options>
-                    <Script-Binding/>
-                </options>
-            </control>
-			<control>
-                <group>[Channel2]</group>
-                <key>Teensy.wheelTurn</key>
-                <description></description>
-                <status>0xB0</status>
-                <midino>0x70</midino>
-                <options>
-                    <Script-Binding/>
-                </options>
-            </control>
-		
-		
+			<!-- General buttons -->
+
+			
+			<!-- Each Channel Buttons -->
+			
+			<!-- Channel 1 -->
             <control>
                 <group>[Channel1]</group>
-                <key>pfl</key>
-                <description>MIDI Learned from 10 messages.</description>
-                <status>0x90</status>
-                <midino>0x68</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>reloop_toggle</key>
-                <description>MIDI Learned from 26 messages.</description>
-                <status>0x90</status>
-                <midino>0x07</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>cue_default</key>
-                <description>MIDI Learned from 6 messages.</description>
-                <status>0x90</status>
-                <midino>0x5D</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>rate</key>
-                <description>MIDI Learned from 198 messages.</description>
-                <status>0xB0</status>
-                <midino>0x01</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>volume</key>
-                <description>MIDI Learned from 54 messages.</description>
-                <status>0xB0</status>
-                <midino>0x28</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>volume</key>
-                <description>MIDI Learned from 29 messages.</description>
-                <status>0xB0</status>
-                <midino>0x2B</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>sync_enabled</key>
-                <description>MIDI Learned from 8 messages.</description>
-                <status>0x90</status>
-                <midino>0x5F</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>rate</key>
-                <description>MIDI Learned from 198 messages.</description>
-                <status>0xB0</status>
-                <midino>0x03</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>sync_enabled</key>
-                <description>MIDI Learned from 22 messages.</description>
-                <status>0x90</status>
-                <midino>0x09</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>reloop_toggle</key>
-                <description>MIDI Learned from 4 messages.</description>
-                <status>0x90</status>
-                <midino>0x61</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
-                <key>parameter2</key>
-                <description>MIDI Learned from 180 messages.</description>
-                <status>0xB0</status>
-                <midino>0x11</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>beatloop_activate</key>
-                <description>MIDI Learned from 24 messages.</description>
-                <status>0x90</status>
-                <midino>0x08</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
-                <key>parameter2</key>
-                <description>MIDI Learned from 86 messages.</description>
-                <status>0xB0</status>
-                <midino>0x1D</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>beatloop_activate</key>
-                <description>MIDI Learned from 2 messages.</description>
-                <status>0x90</status>
-                <midino>0x60</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>cue_default</key>
-                <description>MIDI Learned from 20 messages.</description>
-                <status>0x90</status>
-                <midino>0x0B</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
-                <key>parameter1</key>
-                <description>MIDI Learned from 165 messages.</description>
-                <status>0xB0</status>
-                <midino>0x10</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
                 <key>play</key>
-                <description>MIDI Learned from 2 messages.</description>
+                <description>Play/Pause Channel 1</description>
                 <status>0x80</status>
-                <midino>0x0C</midino>
+                <midino>0x20</midino>
                 <options>
                     <switch/>
                 </options>
             </control>
-            <control>
-                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
-                <key>parameter1</key>
-                <description>MIDI Learned from 35 messages.</description>
-                <status>0xB0</status>
-                <midino>0x1C</midino>
+			
+			<control>
+                <group>[Channel1]</group>
+                <key>beatloop_activate</key>
+                <description>Start Loop Ch1</description>
+                <status>0x90</status>
+                <midino>0x23</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel1]</group>
+                <key>reloop_toggle</key>
+                <description>Stop Loop Ch1</description>
+                <status>0x90</status>
+                <midino>0x24</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel1]</group>
+                <key>beatjump_backward</key>
+                <description>Jump Backwards Ch1</description>
+                <status>0x90</status>
+                <midino>0x25</midino>
                 <options>
                     <normal/>
                 </options>
@@ -211,59 +57,86 @@
             <control>
                 <group>[Channel1]</group>
                 <key>beatjump_forward</key>
-                <description>MIDI Learned from 4 messages.</description>
+                <description>Jump Forward Ch1</description>
                 <status>0x90</status>
-                <midino>0x63</midino>
+                <midino>0x26</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
-            <control>
-                <group>[QuickEffectRack1_[Channel2]]</group>
-                <key>super1</key>
-                <description>MIDI Learned from 200 messages.</description>
-                <status>0xB0</status>
-                <midino>0x13</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[QuickEffectRack1_[Channel1]]</group>
-                <key>super1</key>
-                <description>MIDI Learned from 96 messages.</description>
-                <status>0xB0</status>
-                <midino>0x1F</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
+			
+			<!-- Channel 2 -->
+			<control>
+                <group>[Channel2]</group>
                 <key>play</key>
-                <description>MIDI Learned from 2 messages.</description>
+                <description>Play/Pause Channel 2</description>
                 <status>0x80</status>
-                <midino>0x5C</midino>
+                <midino>0x40</midino>
                 <options>
                     <switch/>
                 </options>
             </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>beatjump_backward</key>
-                <description>MIDI Learned from 2 messages.</description>
+			
+			<control>
+                <group>[Channel2]</group>
+                <key>beatloop_activate</key>
+                <description>Start Loop Ch2</description>
                 <status>0x90</status>
-                <midino>0x62</midino>
+                <midino>0x43</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel2]</group>
+                <key>reloop_toggle</key>
+                <description>Stop Loop Ch2</description>
+                <status>0x90</status>
+                <midino>0x44</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[Channel2]</group>
+                <key>beatjump_backward</key>
+                <description>Jump Backwards Ch2</description>
+                <status>0x90</status>
+                <midino>0x45</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
             <control>
-                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
-                <key>parameter3</key>
-                <description>MIDI Learned from 210 messages.</description>
+                <group>[Channel2]</group>
+                <key>beatjump_forward</key>
+                <description>Jump Forward Ch2</description>
+                <status>0x90</status>
+                <midino>0x46</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			
+			<!-- EQ knobs -->
+            <control>
+                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+                <key>parameter1</key>
+                <description>Channel1 Bass</description>
                 <status>0xB0</status>
-                <midino>0x12</midino>
+                <midino>0x01</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+                <key>parameter2</key>
+                <description>Channel1 Mids</description>
+                <status>0xB0</status>
+                <midino>0x02</midino>
                 <options>
                     <normal/>
                 </options>
@@ -271,9 +144,264 @@
             <control>
                 <group>[EqualizerRack1_[Channel1]_Effect1]</group>
                 <key>parameter3</key>
-                <description>MIDI Learned from 108 messages.</description>
+                <description>Channel1 Highs</description>
                 <status>0xB0</status>
-                <midino>0x1E</midino>
+                <midino>0x03</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+            <control>
+                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+                <key>parameter1</key>
+                <description>Channel2 Bass</description>
+                <status>0xB0</status>
+                <midino>0x04</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+                <key>parameter2</key>
+                <description>Channel2 Mids</description>
+                <status>0xB0</status>
+                <midino>0x05</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+                <key>parameter3</key>
+                <description>Channel2 Highs</description>
+                <status>0xB0</status>
+                <midino>0x06</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<control>
+                <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+                <key>parameter1</key>
+                <description>Channel3 Bass</description>
+                <status>0xB0</status>
+                <midino>0x07</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+                <key>parameter2</key>
+                <description>Channel3 Mids</description>
+                <status>0xB0</status>
+                <midino>0x08</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel3]_Effect1]</group>
+                <key>parameter3</key>
+                <description>Channel3 Highs</description>
+                <status>0xB0</status>
+                <midino>0x09</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+            <control>
+                <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+                <key>parameter1</key>
+                <description>Channel4 Bass</description>
+                <status>0xB0</status>
+                <midino>0x0A</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+                <key>parameter2</key>
+                <description>Channel4 Mids</description>
+                <status>0xB0</status>
+                <midino>0x0B</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[EqualizerRack1_[Channel4]_Effect1]</group>
+                <key>parameter3</key>
+                <description>Channel4 Highs</description>
+                <status>0xB0</status>
+                <midino>0x0C</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<!-- Volume sliders -->
+            <control>
+                <group>[Channel1]</group>
+                <key>volume</key>
+                <description>Volume Channel 1</description>
+                <status>0xB0</status>
+                <midino>0x0D</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel2]</group>
+                <key>volume</key>
+                <description>Volume Channel 2</description>
+                <status>0xB0</status>
+                <midino>0x0E</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel3]</group>
+                <key>volume</key>
+                <description>Volume Channel 3</description>
+                <status>0xB0</status>
+                <midino>0x0F</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel4]</group>
+                <key>volume</key>
+                <description>Volume Channel 4</description>
+                <status>0xB0</status>
+                <midino>0x10</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			
+			<!-- High-/Low-pass-filters -->
+			
+			
+			<!-- CC for each channel -->
+			
+			<!-- Channel 1 -->
+            <control>
+                <group>[Channel1]</group>
+                <key>rate</key>
+                <description>Tempo Channel 1</description>
+                <status>0xB0</status>
+                <midino>0x20</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel1]</group>
+                <key>Teensy.wheelTurn</key>
+                <status>0xB0</status>
+                <midino>0x21</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+			
+			<!-- Channel 2 -->
+			<control>
+                <group>[Channel2]</group>
+                <key>rate</key>
+                <description>Tempo Channel 2</description>
+                <status>0xB0</status>
+                <midino>0x28</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel2]</group>
+                <key>Teensy.wheelTurn</key>
+                <status>0xB0</status>
+                <midino>0x29</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+			
+			<!-- Channel 3 -->
+            <control>
+                <group>[Channel3]</group>
+                <key>rate</key>
+                <description>Tempo Channel 3</description>
+                <status>0xB0</status>
+                <midino>0x30</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel3]</group>
+                <key>Teensy.wheelTurn</key>
+                <status>0xB0</status>
+                <midino>0x31</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+			
+			<!-- Channel 4 -->
+			<control>
+                <group>[Channel4]</group>
+                <key>rate</key>
+                <description>Tempo Channel 4</description>
+                <status>0xB0</status>
+                <midino>0x38</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel4]</group>
+                <key>Teensy.wheelTurn</key>
+                <status>0xB0</status>
+                <midino>0x39</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+			
+            <control>
+                <group>[Channel1]</group>
+                <key>pfl</key>
+                <description>MIDI Learned from 2 messages.</description>
+                <status>0x90</status>
+                <midino>0x08</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[QuickEffectRack1_[Channel1]]</group>
+                <key>super1</key>
+                <description>MIDI Learned from 588 messages.</description>
+                <status>0xB0</status>
+                <midino>0x11</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[QuickEffectRack1_[Channel2]]</group>
+                <key>super1</key>
+                <description>MIDI Learned from 600 messages.</description>
+                <status>0xB0</status>
+                <midino>0x12</midino>
                 <options>
                     <normal/>
                 </options>

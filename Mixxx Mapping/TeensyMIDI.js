@@ -6,9 +6,21 @@ Teensy.wheelTurn = function (channel, control, value, status, group) {
     var newValue = value - 64;
     
    
-    var deckNumber = 1;
-	if (group == "[Channel2]") deckNumber = 2;
-	
+    var deckNumber = 0;
+	switch (group) {
+		case "[Channel1]":
+			deckNumber = 1;
+			break;
+		case "[Channel2]":
+			deckNumber = 2;
+			break;
+		case "[Channel3]":
+			deckNumber = 3;
+			break;
+		case "[Channel4]":
+			deckNumber = 4;
+			break;
+	}
 	
     if (engine.isScratching(deckNumber)) {
         engine.scratchTick(deckNumber, newValue); // Scratch!
