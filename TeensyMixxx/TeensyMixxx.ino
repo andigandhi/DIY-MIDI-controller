@@ -224,6 +224,9 @@ void setup() {
       pinMode(btnConf[i][2], INPUT_PULLUP);
     }
   }
+  //Set Shift Pins to Pullup
+  pinMode(4, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);
 
   //LED pin config
   //we need enable each LED pin as an OUTPUT
