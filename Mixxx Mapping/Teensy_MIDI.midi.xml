@@ -593,7 +593,7 @@
                 <key>rate</key>
                 <description>Tempo Channel 2</description>
                 <status>0xB0</status>
-                <midino>0x28</midino>
+                <midino>0x26</midino>
                 <options>
                     <normal/>
                 </options>
@@ -614,7 +614,7 @@
                 <key>rate</key>
                 <description>Tempo Channel 3</description>
                 <status>0xB0</status>
-                <midino>0x30</midino>
+                <midino>0x28</midino>
                 <options>
                     <normal/>
                 </options>
@@ -635,7 +635,7 @@
                 <key>rate</key>
                 <description>Tempo Channel 4</description>
                 <status>0xB0</status>
-                <midino>0x38</midino>
+                <midino>0x2E</midino>
                 <options>
                     <normal/>
                 </options>
