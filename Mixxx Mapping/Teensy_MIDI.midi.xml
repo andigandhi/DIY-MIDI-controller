@@ -586,6 +586,16 @@
                     <script-binding/>
                 </options>
             </control>
+			<control>
+                <group>[Channel1]</group>
+                <key>Teensy.setLoopSize</key>
+                <description>Loop size select</description>
+                <status>0xB0</status>
+                <midino>0x22</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
 			
 			<!-- Channel 2 -->
 			<control>
@@ -603,6 +613,16 @@
                 <key>Teensy.wheelTurn</key>
                 <status>0xB0</status>
                 <midino>0x29</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+			<control>
+                <group>[Channel2]</group>
+                <key>Teensy.setLoopSize</key>
+                <description>Loop size select</description>
+                <status>0xB0</status>
+                <midino>0x28</midino>
                 <options>
                     <script-binding/>
                 </options>
@@ -628,6 +648,16 @@
                     <script-binding/>
                 </options>
             </control>
+			<control>
+                <group>[Channel3]</group>
+                <key>Teensy.setLoopSize</key>
+                <description>Loop size select</description>
+                <status>0xB0</status>
+                <midino>0x2A</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
 			
 			<!-- Channel 4 -->
 			<control>
@@ -649,7 +679,16 @@
                     <script-binding/>
                 </options>
             </control>
-            
+            <control>
+                <group>[Channel4]</group>
+                <key>Teensy.setLoopSize</key>
+                <description>Loop size select</description>
+                <status>0xB0</status>
+                <midino>0x30</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
 			
 			
 			

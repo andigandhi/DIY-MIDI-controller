@@ -17,3 +17,10 @@ Teensy.wheelTurn = function (channel, control, value, status, group) {
         engine.setValue(group, 'jog', newValue); // Pitch bend
     }
 }
+
+Teensy.setLoopSize = function (channel, control, value, status, group) {
+	var size = Math.pow(2, Math.floor(value/10)-5);
+	
+	engine.setParameter(group, "beatloop_size", size);
+	engine.setParameter(group, "beatjump_size", size);
+}
