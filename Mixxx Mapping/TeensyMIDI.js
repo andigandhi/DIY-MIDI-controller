@@ -24,3 +24,16 @@ Teensy.setLoopSize = function (channel, control, value, status, group) {
 	engine.setParameter(group, "beatloop_size", size);
 	engine.setParameter(group, "beatjump_size", size);
 }
+
+var playButtonLED = function (value, group, control) {
+	var deckNumber = 0x00;
+    if (group === '[Channel2]') deckNumber = 0x01;
+	
+	if (value === 0x7F) {
+		midi.sendShortMsg(0x90, deckNumber, 0x02)
+	} else {
+		midi.sendShortMsg(0x90, deckNumber, 0x00)
+	}
+}
+
+var playConnection1 = engine.makeConnection('[Channel1]', 'play_indicator', playButtonLED);

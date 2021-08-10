@@ -421,7 +421,7 @@ void OnNoteOn(byte channel, byte note, byte velocity)
 {
   if (note<2) {
     ledStatus[note] = 1;
-    digitalWrite(note + 25, blinkMode[note]);
+    digitalWrite(note + 25, 1);
     return;
   } 
   if (note < 4) {
@@ -430,7 +430,7 @@ void OnNoteOn(byte channel, byte note, byte velocity)
   }
   if (note < 6) {
     blinkMode[note-4] = 0;
-    if (ledStatus[note-4]) digitalWrite(note + 21, 0);
+    if (ledStatus[note-4]) digitalWrite(note + 21, 1);
     return;
   }
   if (note < 8) {
