@@ -28,12 +28,13 @@ Teensy.setLoopSize = function (channel, control, value, status, group) {
 var playButtonLED = function (value, group, control) {
 	var deckNumber = 0x00;
     if (group === '[Channel2]') deckNumber = 0x01;
-	
-	if (value === 0x7F) {
-		midi.sendShortMsg(0x90, deckNumber, 0x02)
+	print(value);
+	if (value === 1) {
+		midi.sendShortMsg(0x90, deckNumber, 0x01);
 	} else {
-		midi.sendShortMsg(0x90, deckNumber, 0x00)
+		midi.sendShortMsg(0x80, deckNumber, 0x00);
 	}
 }
 
 var playConnection1 = engine.makeConnection('[Channel1]', 'play_indicator', playButtonLED);
+var playConnection2 = engine.makeConnection('[Channel2]', 'play_indicator', playButtonLED);
